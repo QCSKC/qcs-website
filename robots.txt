@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block admin or draft paths if added later
+Disallow: /admin/
+Disallow: /draft/
+
+# Sitemap location
+Sitemap: https://www.qualitycablesystems.com/sitemap.xml

@@ -1,0 +1,224 @@
+<!--
+  QCS SHARED PARTIALS — REFERENCE FILE
+  Copy nav and footer into every page.
+  This file is NOT served. It exists only to keep the shared HTML in one place for editing.
+
+  DOMAIN:  https://www.qualitycablesystems.com
+  PHONE:   (816) 231-9699  [REPLACE WITH ACTUAL NUMBER]
+  EMAIL:   info@qualitycablesystems.com
+  ADDRESS: 3711 Gardner, Kansas City, MO 64120
+-->
+
+<!-- ================================================================
+     SHARED NAV
+     Usage: paste as first element inside <body> on every page.
+     - On HOME page: class="nav" (transparent, becomes solid on scroll via JS)
+     - On INTERIOR pages: class="nav solid" (always solid navy)
+================================================================ -->
+<!-- NAV-START -->
+<nav class="nav" id="main-nav" aria-label="Main navigation">
+  <div class="nav-logo">
+    <a href="/" aria-label="Quality Cable Systems home">
+      <img src="/images/qcs_logo_horizontal_white.svg" alt="Quality Cable Systems"
+           width="160" height="34"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <span class="nav-logo-fallback"><span>&#9632;</span> QUALITY CABLE SYSTEMS</span>
+    </a>
+  </div>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/capabilities/">What We Build</a></li>
+    <li><a href="/quality/">Quality</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/careers/">Careers</a></li>
+  </ul>
+
+  <a href="/contact/" class="nav-cta">Get a Quote</a>
+
+  <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav drawer -->
+<nav class="nav-mobile" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="/capabilities/">What We Build</a>
+  <a href="/quality/">Quality</a>
+  <a href="/about/">About</a>
+  <a href="/resources/">Resources</a>
+  <a href="/careers/">Careers</a>
+  <a href="/contact/" class="btn-primary">Get a Quote</a>
+</nav>
+<!-- NAV-END -->
+
+
+<!-- ================================================================
+     SHARED CTA BANNER
+     Usage: paste above footer on every page.
+================================================================ -->
+<!-- CTA-START -->
+<section class="cta-banner" aria-labelledby="cta-heading">
+  <div class="cta-banner-inner">
+    <div>
+      <h2 class="cta-banner-h" id="cta-heading">Ready to talk about your project?</h2>
+      <p class="cta-banner-sub">We respond to all inquiries within one week. No runaround&#8202;&#8212;&#8202;just a straight answer.</p>
+    </div>
+    <a href="/contact/" class="btn-dark">Get in Touch</a>
+  </div>
+</section>
+<!-- CTA-END -->
+
+
+<!-- ================================================================
+     SHARED FOOTER
+     Usage: paste as last element before </body> on every page.
+================================================================ -->
+<!-- FOOTER-START -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <a href="/">
+          <img src="/images/qcs_logo_horizontal_white.svg" alt="Quality Cable Systems"
+               width="148" height="30"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+          <span class="footer-logo-fallback"><span>&#9632;</span> QUALITY CABLE SYSTEMS</span>
+        </a>
+      </div>
+      <p class="footer-tagline">Precision. Performance. Partnership.</p>
+      <address class="footer-contact" style="font-style:normal;">
+        3711 Gardner, Kansas City, MO 64120<br>
+        <a href="tel:+18162319699">(816) 231-9699</a><br>
+        <a href="mailto:info@qualitycablesystems.com">info@qualitycablesystems.com</a>
+      </address>
+    </div>
+
+    <div>
+      <div class="footer-col-head">What We Build</div>
+      <ul class="footer-links">
+        <li><a href="/capabilities/wire-harnesses/">Wire Harnesses</a></li>
+        <li><a href="/capabilities/cable-assemblies/">Cable Assemblies</a></li>
+        <li><a href="/capabilities/box-builds/">Box Builds</a></li>
+        <li><a href="/capabilities/">All Capabilities</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-head">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about/">About QCS</a></li>
+        <li><a href="/quality/">Quality</a></li>
+        <li><a href="/about/mission-vision-values/">Mission &amp; Values</a></li>
+        <li><a href="/careers/">Careers</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-head">Get Started</div>
+      <ul class="footer-links">
+        <li><a href="/contact/">Request a Quote</a></li>
+        <li><a href="/contact/">Contact Us</a></li>
+        <li><a href="/resources/">Resources</a></li>
+        <li><a href="https://www.linkedin.com/company/quality-cable-systems" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; 2026 Quality Cable Systems. All rights reserved. Kansas City, MO.</p>
+    <p class="footer-cert">IPC/WHMA-A-620 Certified Manufacturer</p>
+  </div>
+</footer>
+<!-- FOOTER-END -->
+
+
+<!-- ================================================================
+     SHARED SCHEMA — LOCAL BUSINESS
+     Include in <head> of every page. Update telephone and address.
+================================================================ -->
+<!-- SCHEMA-START -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "ManufacturingBusiness"],
+      "@id": "https://www.qualitycablesystems.com/#organization",
+      "name": "Quality Cable Systems",
+      "alternateName": "QCS",
+      "description": "Custom wire harness, cable assembly, and box build manufacturer. IPC/WHMA-A-620 certified. Serving US manufacturers.",
+      "url": "https://www.qualitycablesystems.com",
+      "logo": "https://www.qualitycablesystems.com/images/qcs_logo_horizontal_white.svg",
+      "image": "https://www.qualitycablesystems.com/images/og-image.jpg",
+      "email": "info@qualitycablesystems.com",
+      "telephone": "+18162319699",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3711 Gardner",
+        "addressLocality": "Kansas City",
+        "addressRegion": "MO",
+        "postalCode": "64120",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.0997,
+        "longitude": -94.5786
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Manufacturing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wire Harness Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cable Assembly Manufacturing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Box Build Assembly" } }
+        ]
+      },
+      "knowsAbout": [
+        "Wire Harness Manufacturing",
+        "Cable Assembly",
+        "Box Build Assembly",
+        "IPC/WHMA-A-620",
+        "Electro-Mechanical Assembly",
+        "Contract Manufacturing"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/quality-cable-systems"
+      ]
+    }
+  ]
+}
+</script>
+<!-- SCHEMA-END -->
+
+
+<!-- ================================================================
+     SHARED HEAD META BLOCK TEMPLATE
+     Replace [PAGE TITLE], [META DESC], and [URL PATH] per page.
+================================================================ -->
+<!--
+<title>[PAGE TITLE] | Quality Cable Systems</title>
+<meta name="description" content="[META DESC — 145-155 chars]">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="Quality Cable Systems">
+<meta property="og:title"       content="[PAGE TITLE] | Quality Cable Systems">
+<meta property="og:description" content="[META DESC]">
+<meta property="og:url"         content="https://www.qualitycablesystems.com/[URL PATH]">
+<meta property="og:image"       content="https://www.qualitycablesystems.com/images/og-image.jpg">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="[PAGE TITLE] | Quality Cable Systems">
+<meta name="twitter:description" content="[META DESC]">
+<meta name="twitter:image"       content="https://www.qualitycablesystems.com/images/og-image.jpg">
+
+<link rel="canonical" href="https://www.qualitycablesystems.com/[URL PATH]">
+-->
