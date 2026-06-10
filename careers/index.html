@@ -99,6 +99,70 @@
       margin: 0 auto 24px;
     }
 
+    /* Job listings (rendered from jobs.json) */
+    .roles-list { display: flex; flex-direction: column; gap: 3px; }
+    .job-card {
+      background: rgba(8,45,68,.03);
+      border-left: 3px solid transparent;
+      padding: 28px 30px;
+      transition: border-color .2s, background .2s;
+    }
+    .job-card:hover { border-left-color: var(--orange); background: rgba(8,45,68,.05); }
+    .job-card h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 0 0 8px;
+    }
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .job-meta span { white-space: nowrap; }
+    .job-summary {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 14px;
+      max-width: 720px;
+    }
+    .job-details { margin: 0; }
+    .job-details summary {
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .job-details summary::-webkit-details-marker { display: none; }
+    .job-details summary::after { content: "+"; font-size: 16px; color: var(--orange); }
+    .job-details[open] summary::after { content: "\2013"; }
+    .job-desc {
+      font-size: 14px;
+      color: var(--navy);
+      line-height: 1.75;
+      margin: 16px 0 20px;
+      max-width: 720px;
+    }
+    .job-desc p { margin: 0 0 14px; }
+    .job-apply {
+      display: inline-block;
+      margin-top: 4px;
+    }
+
     /* Benefits grid */
     .benefits-grid {
       display: grid;
@@ -283,8 +347,10 @@
         <h2 id="roles-h">Open roles</h2>
         <p>We're actively building our team. Open positions are posted here as they become available.</p>
       </div>
-      <!-- UPDATE: Replace this placeholder with actual job listings as they become available -->
-      <div class="roles-placeholder">
+      <!-- Job listings are rendered automatically from /careers/jobs.json -->
+      <!-- To post or edit a job, edit jobs.json (or use the QCS job-posting skill) — do NOT edit this markup. -->
+      <div id="roles-list" class="roles-list" aria-live="polite"></div>
+      <div id="roles-empty" class="roles-placeholder" hidden>
         <p>No open positions are posted at this time. We encourage you to check back or reach out directly — we sometimes hire ahead of a formal posting for the right candidate.</p>
         <a href="/contact/" class="btn-primary">Send us your resume</a>
       </div>
@@ -393,5 +459,66 @@
 </footer>
 
 <script src="/js/main.js"></script>
+<script>
+/* Renders open roles from /careers/jobs.json. Content is data-driven so the
+   page markup never has to be edited to post a job. */
+(function () {
+  var listEl = document.getElementById('roles-list');
+  var emptyEl = document.getElementById('roles-empty');
+  if (!listEl) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function paragraphs(text) {
+    return String(text || '')
+      .split(/\n\s*\n/)
+      .map(function (p) { return p.trim(); })
+      .filter(Boolean)
+      .map(function (p) { return '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>'; })
+      .join('');
+  }
+
+  function showEmpty() { if (emptyEl) emptyEl.hidden = false; }
+
+  fetch('/careers/jobs.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : { positions: [] }; })
+    .then(function (data) {
+      var jobs = (data && data.positions ? data.positions : [])
+        .filter(function (j) { return j && j.active !== false && j.title; });
+
+      if (!jobs.length) { showEmpty(); return; }
+
+      jobs.forEach(function (job) {
+        var meta = [job.location, job.type, job.department]
+          .filter(Boolean)
+          .map(function (m) { return '<span>' + esc(m) + '</span>'; })
+          .join('');
+
+        var applyUrl = job.apply_url || '/contact/';
+        var hasDesc = job.description && String(job.description).trim();
+
+        var card = document.createElement('article');
+        card.className = 'job-card';
+        card.innerHTML =
+          '<h3>' + esc(job.title) + '</h3>' +
+          (meta ? '<div class="job-meta">' + meta + '</div>' : '') +
+          (job.summary ? '<p class="job-summary">' + esc(job.summary) + '</p>' : '') +
+          (hasDesc
+            ? '<details class="job-details"><summary>View details</summary>' +
+                '<div class="job-desc">' + paragraphs(job.description) + '</div>' +
+                '<a class="btn-primary job-apply" href="' + esc(applyUrl) + '">Apply now</a>' +
+              '</details>'
+            : '<a class="btn-primary job-apply" href="' + esc(applyUrl) + '">Apply now</a>');
+
+        listEl.appendChild(card);
+      });
+    })
+    .catch(showEmpty);
+})();
+</script>
 </body>
 </html>

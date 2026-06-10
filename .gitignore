@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Internal admin docs & skill drafts — never published to the live site
+_admin/
