@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude plugin *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ryan\\\\Quality Cable Systems\\\\Operations - Documents\\\\Website\\\\_admin\" -Recurse | Select-Object FullName, @{Name=\"Type\";Expression={if\\($_.PSIsContainer\\){\"Folder\"}else{\"File\"}}} | Sort-Object FullName)",
+      "Bash(Get-ChildItem *)"
+    ]
+  }
+}
