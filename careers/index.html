@@ -519,7 +519,7 @@
         var applyUrl = job.apply_url || '/contact/';
         var hasDesc = job.description && String(job.description).trim();
 
-        var jobUrl = 'https://qualitycablesystems.com/careers/' + (job.id ? '#' + encodeURIComponent(job.id) : '');
+        var jobUrl = 'https://qualitycablesystems.com/careers/' + (job.id ? '?job=' + encodeURIComponent(job.id) : '');
         var liUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(jobUrl);
         var liBtn = '<a class="job-share-li" href="' + esc(liUrl) + '" target="_blank" rel="noopener">' +
           '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
@@ -546,6 +546,21 @@
       });
     })
     .catch(showEmpty);
+
+  // If ?job=id is in the URL (e.g. from a LinkedIn share link), scroll to and open that card
+  var params = new URLSearchParams(window.location.search);
+  var targetId = params.get('job');
+  if (targetId) {
+    // Wait for cards to render, then scroll
+    setTimeout(function () {
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var details = el.querySelector('details');
+        if (details) details.open = true;
+      }
+    }, 100);
+  }
 })();
 </script>
 </body>
